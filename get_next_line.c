@@ -6,7 +6,7 @@
 /*   By: shunwata <shunwata@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 15:25:43 by shunwata          #+#    #+#             */
-/*   Updated: 2025/06/03 22:52:15 by shunwata         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:29:15 by shunwata         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static char	*extract_line(char *text)
 	result = malloc(sizeof(char) * (len + 1));
 	if (!result)
 		return (NULL);
-	while (i < text)
+	while (i < len)
 	{
 		result[i] = text[i];
 		i++;
@@ -67,16 +67,12 @@ static char	*update_text(char *text)
 	return (new_saved);
 }
 
-char	*get_next_line(int fd)
+static char	*add_text(int fd, char *saved_text)
 {
-	static char	*saved_text;
-	char		*line;
-	char		*buffer;
-	char		*temp;
-	int			bytes_read;
+	char	*buffer;
+	char	*temp;
+	int		bytes_read;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
@@ -97,6 +93,19 @@ char	*get_next_line(int fd)
 		saved_text = temp;
 	}
 	free(buffer);
+	return (saved_text);
+}
+
+char	*get_next_line(int fd)
+{
+	static char	*saved_text;
+	char		*line;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	saved_text = add_text(fd, saved_text);
+	if (!saved_text)
+		return (NULL);
 	line = extract_line(saved_text);
 	saved_text = update_saved(saved_text);
 	return (line);
