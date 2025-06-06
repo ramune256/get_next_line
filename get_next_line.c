@@ -6,7 +6,7 @@
 /*   By: shunwata <shunwata@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 15:25:43 by shunwata          #+#    #+#             */
-/*   Updated: 2025/06/06 13:27:03 by shunwata         ###   ########.fr       */
+/*   Updated: 2025/06/06 13:46:56 by shunwata         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,10 @@ char	*add_text(int fd, char *saved_text)
 		}
 		buffer[bytes_read] = '\0';
 		if (saved_text == NULL)
+		{
 			saved_text = malloc(sizeof(char));
+			saved_text[0] = '\0';
+		}
 		temp = ft_strjoin(saved_text, buffer);
 		free(saved_text);
 		saved_text = temp;
