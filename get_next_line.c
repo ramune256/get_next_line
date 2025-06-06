@@ -6,7 +6,7 @@
 /*   By: shunwata <shunwata@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 15:25:43 by shunwata          #+#    #+#             */
-/*   Updated: 2025/06/04 16:29:15 by shunwata         ###   ########.fr       */
+/*   Updated: 2025/06/06 13:23:18 by shunwata         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char	*extract_line(char *text)
 	return (result);
 }
 
-static char	*update_text(char *text)
+static char	*update_saved(char *text)
 {
 	char	*new_saved;
 	char	*text_ptr;
