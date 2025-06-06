@@ -6,7 +6,7 @@
 /*   By: shunwata <shunwata@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 15:25:43 by shunwata          #+#    #+#             */
-/*   Updated: 2025/06/06 13:46:56 by shunwata         ###   ########.fr       */
+/*   Updated: 2025/06/06 14:06:02 by shunwata         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,14 @@ char	*update_saved(char *text)
 		text++;
 	if (*text == '\0')
 	{
-		free(text);
+		free(text_ptr);
 		return (NULL);
 	}
 	text++;
 	new_saved = malloc(sizeof(char) * (ft_strlen(text) + 1));
 	i = 0;
 	while (*text)
-	{
-		new_saved[i] = *text;
-		i++;
-	}
+		new_saved[i++] = *text++;
 	new_saved[i] = '\0';
 	free(text_ptr);
 	return (new_saved);
@@ -86,11 +83,6 @@ char	*add_text(int fd, char *saved_text)
 			return (NULL);
 		}
 		buffer[bytes_read] = '\0';
-		if (saved_text == NULL)
-		{
-			saved_text = malloc(sizeof(char));
-			saved_text[0] = '\0';
-		}
 		temp = ft_strjoin(saved_text, buffer);
 		free(saved_text);
 		saved_text = temp;
@@ -106,6 +98,11 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
+	if (saved_text == NULL)
+	{
+		saved_text = malloc(sizeof(char));
+		saved_text[0] = '\0';
+	}
 	saved_text = add_text(fd, saved_text);
 	if (!saved_text)
 		return (NULL);
