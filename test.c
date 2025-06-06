@@ -6,7 +6,7 @@
 /*   By: shunwata <shunwata@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 13:27:44 by shunwata          #+#    #+#             */
-/*   Updated: 2025/06/06 13:33:15 by shunwata         ###   ########.fr       */
+/*   Updated: 2025/06/06 14:29:00 by shunwata         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	main(void)
 	{
         printf("%s", line);
         free(line);
+        sleep(1);
     }
     close(fd);
     return (0);
