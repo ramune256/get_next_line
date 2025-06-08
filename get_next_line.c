@@ -6,11 +6,17 @@
 /*   By: shunwata <shunwata@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 15:25:43 by shunwata          #+#    #+#             */
-/*   Updated: 2025/06/06 14:37:57 by shunwata         ###   ########.fr       */
+/*   Updated: 2025/06/09 00:05:39 by shunwata         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*free_and_NULL(char *ptr)
+{
+	free(ptr);
+	return (NULL);
+}
 
 char	*extract_line(char *text)
 {
@@ -47,12 +53,11 @@ char	*update_saved(char *text)
 	while (*text != '\0' && *text != '\n')
 		text++;
 	if (*text == '\0')
-	{
-		free(text_ptr);
-		return (NULL);
-	}
+		return (free_and_NULL(text_ptr));
 	text++;
 	new_saved = malloc(sizeof(char) * (ft_strlen(text) + 1));
+	if (!new_saved)
+		return (free_and_NULL(text_ptr));
 	i = 0;
 	while (*text)
 		new_saved[i++] = *text++;
@@ -69,7 +74,7 @@ char	*add_text(int fd, char *saved_text)
 
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
-		return (NULL);
+		return (free_and_NULL(saved_text));
 	bytes_read = 1;
 	while (bytes_read > 0 && !ft_strchr(saved_text, '\n'))
 	{
@@ -77,11 +82,13 @@ char	*add_text(int fd, char *saved_text)
 		if (bytes_read < 0)
 		{
 			free(buffer);
-			return (NULL);
+			return (free_and_NULL(saved_text));
 		}
 		buffer[bytes_read] = '\0';
 		temp = ft_strjoin(saved_text, buffer);
 		free(saved_text);
+		if (!temp)
+			return (free_and_NULL(buffer));
 		saved_text = temp;
 	}
 	free(buffer);
@@ -98,12 +105,16 @@ char	*get_next_line(int fd)
 	if (saved_text == NULL)
 	{
 		saved_text = malloc(sizeof(char));
+		if (!saved_text)
+			return (NULL);
 		saved_text[0] = '\0';
 	}
 	saved_text = add_text(fd, saved_text);
 	if (!saved_text)
 		return (NULL);
 	line = extract_line(saved_text);
+	if (!line)
+		return (saved_text = free_and_NULL(saved_text));
 	saved_text = update_saved(saved_text);
 	return (line);
 }
