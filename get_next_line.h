@@ -6,7 +6,7 @@
 /*   By: shunwata <shunwata@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 15:29:17 by shunwata          #+#    #+#             */
-/*   Updated: 2025/06/08 23:24:22 by shunwata         ###   ########.fr       */
+/*   Updated: 2025/06/09 14:09:45 by shunwata         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strjoin(char const *s1, char const *s2);
 
-char	*free_and_NULL(char *ptr);
+char	*free_and_null(char *ptr);
 char	*extract_line(char *text);
 char	*update_saved(char *text);
 char	*add_text(int fd, char *saved_text);
