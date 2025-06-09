@@ -6,7 +6,7 @@
 /*   By: shunwata <shunwata@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 15:25:43 by shunwata          #+#    #+#             */
-/*   Updated: 2025/06/09 19:33:03 by shunwata         ###   ########.fr       */
+/*   Updated: 2025/06/09 19:39:02 by shunwata         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	*add_text(int fd, char *saved_text)
 		if (bytes_read < 0)
 			return (free_and_null(saved_text, buffer));
 		buffer[bytes_read] = '\0';
-		while (ft_strlen(saved_text) + bytes_read + 1 > capacity)
+		while ((int)ft_strlen(saved_text) + bytes_read + 1 > capacity)
 		{
 			saved_text = ft_realloc(saved_text, capacity *= 2);
 			if (!saved_text)
