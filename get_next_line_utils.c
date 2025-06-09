@@ -6,7 +6,7 @@
 /*   By: shunwata <shunwata@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 15:26:03 by shunwata          #+#    #+#             */
-/*   Updated: 2025/06/03 22:46:33 by shunwata         ###   ########.fr       */
+/*   Updated: 2025/06/09 18:17:38 by shunwata         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,6 @@ size_t	ft_strlen(const char *s)
 	len = 0;
 	while (s[len] != '\0')
 		len++;
-	return (len);
-}
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
-{
-	size_t	i;
-	size_t	len;
-
-	i = 0;
-	len = ft_strlen(src);
-	if (dstsize == 0)
-		return (len);
-	while (src[i] && i < dstsize - 1)
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
 	return (len);
 }
 
@@ -72,22 +54,40 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	char	*str;
-	size_t	s1_len;
-	size_t	s2_len;
-	size_t	total_len;
+	unsigned char		*d;
+	const unsigned char	*s;
+	size_t				i;
 
-	if (!s1 || !s2)
+	if (!dst && !src)
 		return (NULL);
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	total_len = s1_len + s2_len;
-	str = (char *)malloc(sizeof(char) * (total_len + 1));
-	if (!str)
+	d = (unsigned char *)dst;
+	s = (const unsigned char *)src;
+	i = 0;
+	while (i < n)
+	{
+		d[i] = s[i];
+		i++;
+	}
+	return (dst);
+}
+
+void	*ft_realloc(void *ptr, size_t size)
+{
+	void	*new_ptr;
+
+	if (!ptr)
+		return (malloc(size));
+	if (size == 0)
+	{
+		free(ptr);
 		return (NULL);
-	ft_strlcpy(str, s1, total_len + 1);
-	ft_strlcat(str, s2, total_len + 1);
-	return (str);
+	}
+	new_ptr = malloc(size);
+	if (!new_ptr)
+		return (NULL);
+	ft_memcpy(new_ptr, ptr, size);
+	free(ptr);
+	return (new_ptr);
 }
