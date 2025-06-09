@@ -6,7 +6,7 @@
 /*   By: shunwata <shunwata@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 15:25:43 by shunwata          #+#    #+#             */
-/*   Updated: 2025/06/09 14:10:54 by shunwata         ###   ########.fr       */
+/*   Updated: 2025/06/09 14:34:31 by shunwata         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ char	*extract_line(char *text)
 	len = 0;
 	i = 0;
 	if (!text)
+		return (NULL);
+	if (*text == '\0')
 		return (NULL);
 	while (text[len] != '\0' && text[len] != '\n')
 		len++;
