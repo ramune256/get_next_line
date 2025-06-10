@@ -6,7 +6,7 @@
 /*   By: shunwata <shunwata@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:23:36 by shunwata          #+#    #+#             */
-/*   Updated: 2025/06/10 16:25:25 by shunwata         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:41:25 by shunwata         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	main(void)
 
 	while ((line = get_next_line(0)) != NULL)
 	{
-	printf("入力: [%s]\n", line);
-	free(line);
+		printf("入力: [%s]\n", line);
+		free(line);
 	}
 	return (0);
 }
